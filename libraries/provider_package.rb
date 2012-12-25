@@ -70,7 +70,7 @@ class Chef
           available_info = shell_out!("pkgin avail | grep ^#{package}-[0-9] | awk '{ print $1 }'", :env => nil, :returns => [0,1])
           
           unless available_info.nil? || available_info.stdout.empty?
-            candidate_info = available_info.stdout.split(/(-[0-9])/)
+            candidate_info = available_info.stdout.split.last.split(/(-[0-9])/)
             candidate_name = candidate_info[0]
             candidate_version = (candidate_info[1]+candidate_info[2]).chop.reverse.chop.reverse
           end
